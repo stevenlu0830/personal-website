@@ -140,32 +140,6 @@ const PROJECTS = [
     ],
     skills: ["User Interface Design", "Teamwork", "Adobe XD"],
   },
-  {
-    name: "StarList App Design",
-    dates: "Oct 2024",
-    context: "HelloHacks (organised by UBC BizTech)",
-    description:
-      "StarList is an app that allows users to connect, share opinions and express their passion for specific songs, artists and moments in music.",
-    bullets: [
-      "Designed the StarList app in a team, enabling users to connect and share their passion for music",
-      "Created a backend simulation of the app using Python and a GitHub repository",
-      'Created a frontend simulation of the app using Figma, exploring the UI with the "workflow" feature to organize nearly 10 elements',
-    ],
-    skills: ["Python", "Figma", "GitHub", "Product Management"],
-  },
-  {
-    name: "E-Waste Management: China vs India",
-    dates: "May 2024 – Jun 2024",
-    context: "Research paper — UBC WRDS 150(A)",
-    description:
-      "A comparative case study analysis of e-waste management in China and India.",
-    bullets: [
-      "Researched e-waste management in China and India as case studies from a total of 25 primary and secondary sources",
-      "Compared and discussed how China and India managed e-waste in different ways with the aid of a table and a diagram",
-      "Created a visually appealing infographic using Canva to briefly describe the research situation and findings",
-    ],
-    skills: ["Canva", "Research Skills", "Case Studies", "Proposal Writing"],
-  },
 ];
 
 const SKILLS: { category: string; items: string }[] = [
@@ -289,9 +263,6 @@ function Section({
   return (
     <section id={id} className="mt-20">
       <h2 className="text-2xl font-bold text-accent">
-        <span aria-hidden="true" className="text-muted">
-          ##{" "}
-        </span>
         {title}
       </h2>
       <div className="mt-6 space-y-8">{children}</div>
@@ -403,8 +374,8 @@ function SongList({
 export default function Home() {
   return (
     <div>
-      <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur">
-        <nav className="mx-auto flex max-w-4xl flex-wrap gap-x-5 gap-y-1 px-6 py-3 text-sm">
+      <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur lg:fixed lg:inset-y-0 lg:left-0 lg:w-56 lg:overflow-y-auto lg:border-b-0 lg:border-r lg:bg-background lg:backdrop-blur-none">
+        <nav className="mx-auto flex max-w-4xl flex-wrap gap-x-5 gap-y-1 px-6 py-3 text-sm lg:mx-0 lg:max-w-none lg:flex-col lg:gap-y-3 lg:py-10">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
@@ -417,10 +388,10 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-4xl px-6 pb-24">
+      <div className="lg:pl-56">
+        <main className="mx-auto max-w-4xl px-6 pb-24">
         {/* Home */}
         <section id="home" className="pt-24 text-center">
-          <p className="text-accent">$ whoami</p>
           <h1 className="mt-4 text-5xl font-bold tracking-tight">Steven Lu</h1>
           <p className="mt-4 text-muted">
             Computer Science (AI Option) @ The University of British Columbia
@@ -432,7 +403,7 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <Section id="about" title="About">
+        <Section id="about" title="🤓 About">
           <p className="leading-relaxed">
             Hi, I&apos;m Steven! I am a third-year Computer Science student at
             the University of British Columbia, specializing in the AI Option.
@@ -450,21 +421,21 @@ export default function Home() {
         </Section>
 
         {/* Experience */}
-        <Section id="experience" title="Experience">
+        <Section id="experience" title="💻 Experience">
           {EXPERIENCE.map((e) => (
             <Entry key={e.title} {...e} />
           ))}
         </Section>
 
         {/* Projects */}
-        <Section id="projects" title="Projects">
+        <Section id="projects" title="👨🏻‍💻 Projects">
           {PROJECTS.map((p) => (
             <ProjectCard key={p.name} project={p} />
           ))}
         </Section>
 
         {/* Technical Skills */}
-        <Section id="skills" title="Technical Skills">
+        <Section id="skills" title="🦾 Technical Skills">
           <div className="space-y-4">
             {SKILLS.map((s) => (
               <div key={s.category}>
@@ -476,7 +447,7 @@ export default function Home() {
         </Section>
 
         {/* Education */}
-        <Section id="education" title="Education">
+        <Section id="education" title="📚 Education">
           <Entry
             title="The University of British Columbia"
             org="Bachelor of Science (BSc), Computer Science"
@@ -497,7 +468,7 @@ export default function Home() {
         </Section>
 
         {/* Relevant Courses */}
-        <Section id="courses" title="Relevant Courses">
+        <Section id="courses" title="👨🏻‍🏫 Relevant Courses">
           <ul className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
             {COURSES.map((c) => (
               <li key={c.code} className="flex gap-3">
@@ -509,7 +480,7 @@ export default function Home() {
         </Section>
 
         {/* Certifications */}
-        <Section id="certifications" title="Certifications">
+        <Section id="certifications" title="🌟 Certifications">
           <Entry
             title="Google AI Professional Certificate"
             org="Coursera"
@@ -525,14 +496,14 @@ export default function Home() {
         </Section>
 
         {/* Volunteering */}
-        <Section id="volunteering" title="Volunteering">
+        <Section id="volunteering" title="💁🏻‍♂️ Volunteering">
           {VOLUNTEERING.map((v) => (
             <Entry key={v.title} {...v} />
           ))}
         </Section>
 
         {/* Fun Facts */}
-        <Section id="fun-facts" title="Fun Facts">
+        <Section id="fun-facts" title="🤡 Fun Facts">
           <div>
             <h3 className="font-bold">Bucket-list Traveling Destinations</h3>
             <ul className="mt-2 space-y-1 text-sm text-muted">
@@ -549,7 +520,7 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <SongList title="Favourite Canto-pop" songs={SONGS_CANTOPOP} />
+          <SongList title="Favourite Canto-pop Songs" songs={SONGS_CANTOPOP} />
           <SongList
             title="Favourite Songs (other than Canto-pop)"
             songs={SONGS_OTHER}
@@ -558,47 +529,48 @@ export default function Home() {
 
         {/* Contacts — TODO: replace the placeholder links below with your real
             LinkedIn URL, email address, and GitHub username before publishing */}
-        <Section id="contacts" title="Contacts — Let's connect!">
+        <Section id="contacts" title="🤝 Contacts — Let's connect!">
           <ul className="space-y-2 text-sm">
             <li>
               <span className="text-accent">LinkedIn: </span>
               <a
-                href="https://www.linkedin.com/in/your-profile"
+                href="https://www.linkedin.com/in/stevenlu0830/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline decoration-border underline-offset-4 hover:text-accent"
               >
-                linkedin.com/in/your-profile
+                linkedin.com/in/stevenlu0830
               </a>
             </li>
             <li>
               <span className="text-accent">Email: </span>
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:stevenlu0830@gmail.com"
                 className="underline decoration-border underline-offset-4 hover:text-accent"
               >
-                your.email@example.com
+                stevenlu0830@gmail.com
               </a>
             </li>
             <li>
               <span className="text-accent">GitHub: </span>
               <a
-                href="https://github.com/your-username"
+                href="https://github.com/stevenlu0830"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline decoration-border underline-offset-4 hover:text-accent"
               >
-                github.com/your-username
+                github.com/stevenlu0830
               </a>
             </li>
           </ul>
         </Section>
 
-      </main>
+        </main>
 
-      <footer className="mx-auto max-w-4xl border-t border-border px-6 py-6 text-center text-xs text-muted">
-        <p>© 2026 Steven Lu · Built with Next.js</p>
-      </footer>
+        <footer className="mx-auto max-w-4xl border-t border-border px-6 py-6 text-center text-xs text-muted">
+          <p>© 2026 Steven Lu · Built with Next.js</p>
+        </footer>
+      </div>
     </div>
   );
 }

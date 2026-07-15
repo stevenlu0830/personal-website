@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Steven Lu | Personal Website",
+  title: "Steven Lu",
   description:
     "Steven Lu — Computer Science student at the University of British Columbia, specializing in the AI Option.",
 };
