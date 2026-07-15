@@ -10,7 +10,7 @@ export const EXPERIENCE: Job[] = [
   {
     slug: "fano-labs",
     title: "Software Engineer",
-    org: "Fano (Fano Labs) · Co-op",
+    org: "Fano Labs · Co-op",
     meta: "Jun 2026 – Present · Hong Kong SAR · Hybrid",
     bullets: [],
   },

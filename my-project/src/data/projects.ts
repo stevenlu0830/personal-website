@@ -40,12 +40,12 @@ export const PROJECTS: Project[] = [
     attachments: [
       {
         kind: "pdf",
-        label: "Project Presentation — Lights, Camera, Correlation (PDF)",
+        label: "Project Presentation",
         src: "/projects-file-attachments/film-industry-1.pdf",
       },
       {
         kind: "pdf",
-        label: "Formal Report (PDF)",
+        label: "Project Report",
         src: "/projects-file-attachments/film-industry-2.pdf",
       },
     ],
@@ -55,8 +55,10 @@ export const PROJECTS: Project[] = [
     name: "UBC Grade Calculator",
     dates: "Jan 2026",
     context: "nwHacks 2026 Hackathon Project",
-    description:
-      "We often used grade calculators on the website to calculate course grades in order to track the progress of our courses so far. However, lots of calculators we found on the website are too simple such that they’ve missed subtle breakdown of course grades such as the contributions to course grade by one single assignment or one single phase of course project. Perhaps a spreadsheet would help, but you need to create a table, enter the formula to calculate the course grades. For better approximation you also need to take account of dropping or downweighting lowest grades if necessary which makes the formula more complex. UBC Grade Calculator is a web application vibe-coded by Lovable AI to simplify grade calculation process by user-friendly interfaces, buttons and drop/downweighting grade settings, and the app calculates the final grades for you.",
+    description: [
+      "We often used grade calculators on the website to calculate course grades in order to track the progress of our courses so far. However, lots of calculators we found on the website are too simple such that they’ve missed subtle breakdown of course grades such as the contributions to course grade by one single assignment or one single phase of course project.",
+      "Perhaps a spreadsheet would help, but you need to create a table, enter the formula to calculate the course grades. For better approximation you also need to take account of dropping or downweighting lowest grades if necessary which makes the formula more complex. UBC Grade Calculator is a web application vibe-coded by Lovable AI to simplify grade calculation process by user-friendly interfaces, buttons and drop/downweighting grade settings, and the app calculates the final grades for you.",
+    ],
     bullets: [
       "Conceptualized and rapidly prototyped a comprehensive web application during nwHacks 2026, utilizing ChatGPT for feature ideation and Lovable AI for rapid code generation and deployment.",
       "Engineered intuitive user interfaces that simplify complex grading calculations, allowing students to dynamically track assignment breakdowns, project phases, and overall course progress.",
@@ -92,7 +94,7 @@ export const PROJECTS: Project[] = [
     ],
     links: [
       {
-        label: "Demo Video (YouTube)",
+        label: "Demo Video",
         href: "https://youtu.be/iOwl0U4kJtI",
       },
     ],
@@ -120,7 +122,7 @@ export const PROJECTS: Project[] = [
     attachments: [
       {
         kind: "image",
-        label: "Best Graphics — 2025 year-end showcase announcement",
+        label: "Best Graphics",
         src: "/projects-file-attachments/umbra-by-avalon-games.png",
         width: 1540,
         height: 1504,
@@ -218,7 +220,7 @@ export const PROJECTS: Project[] = [
     skills: ["User Interface Design", "Teamwork", "Adobe XD"],
     links: [
       {
-        label: "LinkedIn Post",
+        label: "Event Post",
         href: "https://www.linkedin.com/feed/update/urn:li:activity:7205961981890080768/",
       },
     ],

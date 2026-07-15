@@ -49,7 +49,12 @@ export default async function ProjectPage({
         <section className="mt-10">
           <div className="mt-4 space-y-4 leading-relaxed text-[#dea893]">
             <p>{project.context}</p>
-            <p>{project.description}</p>
+            {(Array.isArray(project.description)
+              ? project.description
+              : [project.description]
+            ).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
             <ul className="space-y-3">
               {project.bullets.map((b) => (
                 <li key={b}>
