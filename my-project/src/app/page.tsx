@@ -396,23 +396,24 @@ export default function Home() {
 
         {/* Education */}
         <Section id="education" title="📚 Education">
-          <Entry
-            title="The University of British Columbia"
-            org="Bachelor of Science (BSc), Computer Science"
-            meta="Sep 2023 – Apr 2028 · GPA: 3.8"
-            bullets={[
-              "Activities and societies: Dream Launch Startup Hackathon, HelloHacks, UBC Game Dev Project Team, nwHacks",
-              "Originally from Arts, transferred to Science in June 2024",
-            ]}
-          />
-          <Entry
-            title="Chan Sui Ki (La Salle) College"
-            org="Secondary"
-            meta="Sep 2017 – Aug 2023"
-            bullets={[
-              "Activities and societies: Transport and Logistics Club, Mathematics Gifted Programme",
-            ]}
-          />
+          {[
+            {
+              school: "The University of British Columbia",
+              degree: "Bachelor of Science (BSc), Computer Science",
+              years: "Sep 2023 – Apr 2028 · GPA: 3.8",
+            },
+            {
+              school: "Chan Sui Ki (La Salle) College",
+              degree: "Secondary",
+              years: "Sep 2017 – Aug 2023",
+            },
+          ].map((edu) => (
+            <div key={edu.school} className="border-l-2 border-border pl-5">
+              <h3 className="text-lg font-bold text-[#dcdcaa]">{edu.school}</h3>
+              <p className="text-[#9ddcff]">{edu.degree}</p>
+              <p className="text-sm text-[#9ddcff]">{edu.years}</p>
+            </div>
+          ))}
         </Section>
 
         {/* Relevant Courses */}
@@ -420,7 +421,7 @@ export default function Home() {
           <ul className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
             {COURSES.map((c) => (
               <li key={c.code} className="flex gap-3">
-                <span className="shrink-0 text-accent">{c.code}</span>
+                <span className="shrink-0 text-[#dcdcaa]">{c.code}</span>
                 <span className="text-muted">{c.name}</span>
               </li>
             ))}
