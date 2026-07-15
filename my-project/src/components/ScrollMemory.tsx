@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const KEY = "home-scroll";
-const DETAIL_PATH = /^\/(projects|experience|certifications)\//;
+const DETAIL_PATH = /^\/(projects|experience|certifications|volunteering)\//;
 
 // useLayoutEffect would warn during SSR, so fall back to useEffect there.
 const useIsomorphicLayoutEffect =
@@ -38,16 +38,16 @@ export default function ScrollMemory() {
     if (saved === null) return;
     const y = Number(saved);
 
-    const root = document.documentElement;
-    const previousBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "auto";
-
+    // Scrolling is instant site-wide (smooth is scoped to in-page nav clicks
+    // via SmoothAnchors), so the restore never animates. Running before paint
+    // means the page's first frame is already at the saved position — the
+    // user sees no motion. The rAF loop just waits for the page to reach full
+    // height before scrolling, in case layout isn't settled on the first frame.
     let tries = 0;
     const restore = () => {
-      const maxY = root.scrollHeight - window.innerHeight;
+      const maxY = document.documentElement.scrollHeight - window.innerHeight;
       if (maxY >= y || tries > 60) {
         window.scrollTo(0, y);
-        root.style.scrollBehavior = previousBehavior;
       } else {
         tries += 1;
         requestAnimationFrame(restore);

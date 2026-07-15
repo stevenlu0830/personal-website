@@ -4,6 +4,7 @@ import avatar from "../../icons/avatar.jpg";
 import { EXPERIENCE } from "@/data/experience";
 import { PROJECTS } from "@/data/projects";
 import { CERTIFICATIONS } from "@/data/certifications";
+import { VOLUNTEERING } from "@/data/volunteering";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
@@ -86,51 +87,6 @@ const COURSES = [
   { code: "CPSC 121", name: "Models of Computation" },
 ];
 
-const VOLUNTEERING = [
-  {
-    title: "Event Captain",
-    org: "HK House",
-    meta: "Feb 2025 – May 2026 · Arts and Culture",
-    bullets: [
-      "Led volunteers of the HK House organization by briefing them on their tasks during the event day",
-      "Managed on-site operations for a high-attendance event with over 1000 participants to ensure events run smoothly",
-      "Supported coordination between the volunteers and the event planning team to ensure effective communication",
-      "Addressed volunteers' questions regarding their tasks to make them clear on their responsibilities",
-    ],
-  },
-  {
-    title: "Game Helper",
-    org: "HK House",
-    meta: "May 2024 – Present · Arts and Culture",
-    bullets: [
-      "Promoted Hong Kong culture by introducing cultural games to over 1000 participants across the world",
-      "Enhanced participants' experience by playing cultural games with them",
-      "Created a welcoming environment to let participants enjoy and immerse in a variety of cultural games",
-      "Offered hints, tips, and strategies to help participants advance in cultural games and solve riddles",
-    ],
-  },
-  {
-    title: "Student Volunteer (Science RXN)",
-    org: "Science Undergraduate Society of UBC Vancouver",
-    meta: "Sep 2025 · Science and Technology",
-    bullets: [
-      "Created exciting and meaningful experiences for first-year science students to foster engagement and involvement in the science community",
-      "Built and promoted a respectful, inclusive, and welcoming environment for all students",
-      "Assisted the station coordinator with event setup and cleanup to ensure smooth operations and an organized environment",
-    ],
-  },
-  {
-    title: "Vice Chairman (Transport and Logistics Club)",
-    org: "Chan Sui Ki (La Salle) College",
-    meta: "Sep 2020 – Aug 2022 · Science and Technology",
-    bullets: [
-      "Worked with internal members to plan and organize events such as movie sharing and trivia quizzes",
-      "Participated in the preparation and running of the club's weekly meetings by creating and keeping track of agendas",
-      "Discussed the feasibility of organizing events based on factors such as time, budget and manpower",
-    ],
-  },
-];
-
 const SONGS_CANTOPOP = [
   {
     label: "張敬軒 Hins Cheung — 隱形遊樂場 Imaginary Fairground",
@@ -180,37 +136,6 @@ function Section({
   );
 }
 
-function Entry({
-  title,
-  org,
-  meta,
-  bullets,
-}: {
-  title: string;
-  org: string;
-  meta: string;
-  bullets: string[];
-}) {
-  return (
-    <div className="border-l-2 border-border pl-5">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-accent">{org}</p>
-      <p className="text-sm text-muted">{meta}</p>
-      {bullets.length > 0 && (
-        <ul className="mt-3 space-y-2 text-sm leading-relaxed">
-          {bullets.map((b) => (
-            <li key={b}>
-              <span aria-hidden="true" className="text-accent">
-                -{" "}
-              </span>
-              {b}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
 
 function SkillTag({ label }: { label: string }) {
   return (
@@ -456,8 +381,26 @@ export default function Home() {
 
         {/* Volunteering */}
         <Section id="volunteering" title="💁🏻‍♂️ Volunteering">
-          {VOLUNTEERING.map((v) => (
-            <Entry key={v.title} {...v} />
+          {VOLUNTEERING.map((role) => (
+            <Link
+              key={role.slug}
+              href={`/volunteering/${role.slug}`}
+              className="group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]"
+            >
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="text-lg font-bold text-[#dcdcaa]">
+                  {role.title}
+                </h3>
+                <span
+                  aria-hidden="true"
+                  className="shrink-0 text-muted transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </div>
+              <p className="text-[#9ddcff]">{role.org}</p>
+              <p className="text-sm text-[#9ddcff]">{role.meta}</p>
+            </Link>
           ))}
         </Section>
 
