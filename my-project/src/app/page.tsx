@@ -154,18 +154,18 @@ function SongList({
 }) {
   return (
     <div>
-      <h3 className="font-bold">{title}</h3>
+      <h3 className="font-bold text-[#dcdcaa]">{title}</h3>
       <ul className="mt-2 space-y-1 text-sm">
         {songs.map((s) => (
           <li key={s.href}>
-            <span aria-hidden="true" className="text-accent">
+            <span aria-hidden="true" className="text-[#9ddcff]">
               ♪{" "}
             </span>
             <a
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-border underline-offset-4 hover:text-accent"
+              className="text-[#9ddcff] underline decoration-border underline-offset-4 transition-colors hover:text-[#4a90c2]"
             >
               {s.label}
             </a>
@@ -407,7 +407,9 @@ export default function Home() {
         {/* Fun Facts */}
         <Section id="fun-facts" title="🤡 Fun Facts">
           <div>
-            <h3 className="font-bold">Bucket-list Traveling Destinations</h3>
+            <h3 className="font-bold text-[#dcdcaa]">
+              Bucket-list Traveling Destinations
+            </h3>
             <ul className="mt-2 space-y-1 text-sm text-muted">
               {[
                 "London @ UK",

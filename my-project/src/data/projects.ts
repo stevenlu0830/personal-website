@@ -200,7 +200,7 @@ export const PROJECTS: Project[] = [
     attachments: [
       {
         kind: "pdf",
-        label: "Project Report (PDF)",
+        label: "Project Report",
         src: "/projects-file-attachments/heart-disease-prediction.pdf",
       },
     ],
