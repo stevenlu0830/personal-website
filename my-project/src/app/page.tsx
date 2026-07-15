@@ -3,6 +3,7 @@ import Link from "next/link";
 import avatar from "../../icons/avatar.jpg";
 import { EXPERIENCE } from "@/data/experience";
 import { PROJECTS } from "@/data/projects";
+import { CERTIFICATIONS } from "@/data/certifications";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
@@ -430,18 +431,27 @@ export default function Home() {
 
         {/* Certifications */}
         <Section id="certifications" title="🌟 Certifications">
-          <Entry
-            title="Google AI Professional Certificate"
-            org="Coursera"
-            meta="Issued Jun 2026"
-            bullets={["Google Gemini and Google AI Studio"]}
-          />
-          <Entry
-            title="Mathematics Gifted Programme"
-            org="The Hong Kong Polytechnic University"
-            meta="Issued Aug 2021"
-            bullets={["Mathematics"]}
-          />
+          {CERTIFICATIONS.map((cert) => (
+            <Link
+              key={cert.slug}
+              href={`/certifications/${cert.slug}`}
+              className="group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]"
+            >
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="text-lg font-bold text-[#dcdcaa]">
+                  {cert.name}
+                </h3>
+                <span
+                  aria-hidden="true"
+                  className="shrink-0 text-muted transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </div>
+              <p className="text-[#9ddcff]">{cert.org}</p>
+              <p className="text-sm text-[#9ddcff]">{cert.meta}</p>
+            </Link>
+          ))}
         </Section>
 
         {/* Volunteering */}

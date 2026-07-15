@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const KEY = "home-scroll";
-const DETAIL_PATH = /^\/(projects|experience)\//;
+const DETAIL_PATH = /^\/(projects|experience|certifications)\//;
+
+// useLayoutEffect would warn during SSR, so fall back to useEffect there.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function ScrollMemory() {
   const pathname = usePathname();
@@ -22,8 +26,10 @@ export default function ScrollMemory() {
     return () => document.removeEventListener("click", onClick, true);
   }, []);
 
-  // Restore it when navigating from a detail page back to the home page
-  useEffect(() => {
+  // Restore it when navigating from a detail page back to the home page.
+  // Runs before paint (useLayoutEffect) so the page never flashes at the top,
+  // and forces non-smooth scrolling so the jump is never animated.
+  useIsomorphicLayoutEffect(() => {
     const cameFromDetail = DETAIL_PATH.test(prevPath.current);
     prevPath.current = pathname;
     if (pathname !== "/" || !cameFromDetail) return;
@@ -32,14 +38,16 @@ export default function ScrollMemory() {
     if (saved === null) return;
     const y = Number(saved);
 
-    // The page re-renders asynchronously after the navigation; wait until it
-    // is tall enough to scroll to the saved position (capped at ~1s).
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+
     let tries = 0;
     const restore = () => {
-      const maxY =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const maxY = root.scrollHeight - window.innerHeight;
       if (maxY >= y || tries > 60) {
-        window.scrollTo({ top: y, behavior: "instant" });
+        window.scrollTo(0, y);
+        root.style.scrollBehavior = previousBehavior;
       } else {
         tries += 1;
         requestAnimationFrame(restore);
