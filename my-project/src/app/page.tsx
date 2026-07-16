@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import avatar from "../../icons/avatar.jpg";
 import SiteNav from "@/components/SiteNav";
+import PipInstall from "@/components/PipInstall";
 import {
   ProjectCard,
   CertificationCard,
@@ -229,6 +230,7 @@ export default function Home() {
             AI · Machine Learning · Software Engineering · Data Science · Web
             Development
           </p>
+          <PipInstall />
         </section>
 
         {/* About */}

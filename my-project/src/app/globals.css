@@ -4,12 +4,14 @@
   --background: #2b2b2b;
   --surface: #333333;
   --border: #4d4d4d;
-  --foreground: #dea893; /* (i.e. dark red) */
-  --muted: #9ddcff; /* (i.e. light blue) */
-  --accent: #4fc9af; /* (i.e. green) */
-  /* --accent: #dcdcaa; (i.e. light yellow) */
-
+  --foreground: #dea893; /* (i.e. printf statement dark red) */
+  --muted: #9ddcff; /* (i.e. variable name light blue) */
+  --accent: #4fc9af; /* (i.e. library name green) */
 }
+
+/* #dcdcaa (i.e. function name light yellow) */
+/* #f44747 (i.e. pip local install red) */
+/* #dddddd (i.e. CLI white) */
 
 @theme inline {
   --color-background: var(--background);
