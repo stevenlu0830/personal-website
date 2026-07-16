@@ -2,6 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import avatar from "../../icons/avatar.jpg";
 import SiteNav from "@/components/SiteNav";
+import {
+  ProjectCard,
+  CertificationCard,
+  VolunteeringCard,
+} from "@/components/cards";
 import { EXPERIENCE } from "@/data/experience";
 import { PROJECTS } from "@/data/projects";
 import { CERTIFICATIONS } from "@/data/certifications";
@@ -157,11 +162,14 @@ function Section({
 }
 
 
-function SkillTag({ label }: { label: string }) {
+function ViewAllButton({ href, label }: { href: string; label: string }) {
   return (
-    <span className="inline-block rounded border border-border bg-background px-2 py-0.5 text-xs text-muted">
-      {label}
-    </span>
+    <Link
+      href={href}
+      className="block rounded border border-border bg-surface px-5 py-3 text-center text-sm text-[#dcdcaa] transition-colors hover:border-[#dcdcaa] sm:hidden"
+    >
+      {label} <span aria-hidden="true">→</span>
+    </Link>
   );
 }
 
@@ -269,30 +277,17 @@ export default function Home() {
         {/* Projects */}
         <Section id="projects" title="👨🏻‍💻 Projects">
           <div className="grid gap-6 sm:grid-cols-2">
-            {PROJECTS.map((p) => (
-              <Link
+            {PROJECTS.map((p, i) => (
+              <ProjectCard
                 key={p.slug}
-                href={`/projects/${p.slug}`}
-                className="group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]"
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-lg font-bold text-[#dcdcaa]">{p.name}</h3>
-                  <span
-                    aria-hidden="true"
-                    className="shrink-0 text-muted transition-transform group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-[#9ddcff]">{p.dates}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.skills.map((s) => (
-                    <SkillTag key={s} label={s} />
-                  ))}
-                </div>
-              </Link>
+                project={p}
+                className={i >= 2 ? "max-sm:hidden" : ""}
+              />
             ))}
           </div>
+          {PROJECTS.length > 2 && (
+            <ViewAllButton href="/projects" label="View All Projects" />
+          )}
         </Section>
 
         {/* Technical Skills */}
@@ -357,52 +352,33 @@ export default function Home() {
 
         {/* Certifications */}
         <Section id="certifications" title="🌟 Certifications">
-          {CERTIFICATIONS.map((cert) => (
-            <Link
+          {CERTIFICATIONS.map((cert, i) => (
+            <CertificationCard
               key={cert.slug}
-              href={`/certifications/${cert.slug}`}
-              className="group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg font-bold text-[#dcdcaa]">
-                  {cert.name}
-                </h3>
-                <span
-                  aria-hidden="true"
-                  className="shrink-0 text-muted transition-transform group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </div>
-              <p className="text-[#9ddcff]">{cert.org}</p>
-              <p className="text-sm text-[#9ddcff]">{cert.meta}</p>
-            </Link>
+              cert={cert}
+              className={i >= 2 ? "max-sm:hidden" : ""}
+            />
           ))}
+          {CERTIFICATIONS.length > 2 && (
+            <ViewAllButton
+              href="/certifications"
+              label="View All Certifications"
+            />
+          )}
         </Section>
 
         {/* Volunteering */}
         <Section id="volunteering" title="💁🏻‍♂️ Volunteering">
-          {VOLUNTEERING.map((role) => (
-            <Link
+          {VOLUNTEERING.map((role, i) => (
+            <VolunteeringCard
               key={role.slug}
-              href={`/volunteering/${role.slug}`}
-              className="group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg font-bold text-[#dcdcaa]">
-                  {role.title}
-                </h3>
-                <span
-                  aria-hidden="true"
-                  className="shrink-0 text-muted transition-transform group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </div>
-              <p className="text-[#9ddcff]">{role.org}</p>
-              <p className="text-sm text-[#9ddcff]">{role.meta}</p>
-            </Link>
+              role={role}
+              className={i >= 2 ? "max-sm:hidden" : ""}
+            />
           ))}
+          {VOLUNTEERING.length > 2 && (
+            <ViewAllButton href="/volunteering" label="View All Volunteering" />
+          )}
         </Section>
 
         {/* Fun Facts */}
