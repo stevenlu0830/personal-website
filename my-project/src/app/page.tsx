@@ -219,7 +219,7 @@ export default function Home() {
             priority
             className="mx-auto h-36 w-36 rounded-full border-2 border-border object-cover"
           />
-          <h1 className="mt-6 text-5xl font-bold tracking-tight text-[#dcdcaa]">
+          <h1 className="mt-6 text-5xl font-bold tracking-tight text-[#4fc9af]">
             Steven Lu
           </h1>
           <p className="mt-4 text-[#dea893]">

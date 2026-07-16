@@ -49,7 +49,7 @@ export default function SiteNav() {
           key={item.href}
           href={item.href}
           onClick={onNavigate}
-          className="text-muted transition-colors hover:text-accent"
+          className="text-[#4fc9af] transition-colors hover:text-[#9ddcff]"
         >
           {item.label}
         </a>
