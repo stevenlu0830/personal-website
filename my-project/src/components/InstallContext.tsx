@@ -1,10 +1,18 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
 
 type AboutOutput = null | "intro" | "error";
 type ExperienceOutput = null | "cards" | "error";
 type ProjectsOutput = null | "grid" | "error";
+type TechOutputs = Record<string, "ok" | "error">;
 
 type CellCtx = {
   installed: boolean;
@@ -15,6 +23,12 @@ type CellCtx = {
   setExperienceOutput: (v: ExperienceOutput) => void;
   projectsOutput: ProjectsOutput;
   setProjectsOutput: (v: ProjectsOutput) => void;
+  // Technical Skills: whether the first cell defined `tech_skills`, plus each
+  // cell's output keyed by category.
+  techDefined: boolean;
+  setTechDefined: (v: boolean) => void;
+  techOutputs: TechOutputs;
+  setTechOutputs: Dispatch<SetStateAction<TechOutputs>>;
 };
 
 const Ctx = createContext<CellCtx>({
@@ -26,6 +40,10 @@ const Ctx = createContext<CellCtx>({
   setExperienceOutput: () => {},
   projectsOutput: null,
   setProjectsOutput: () => {},
+  techDefined: false,
+  setTechDefined: () => {},
+  techOutputs: {},
+  setTechOutputs: () => {},
 });
 
 // Holds the interactive code-cell state (pip installed, About / Experience
@@ -38,6 +56,8 @@ export function InstallProvider({ children }: { children: ReactNode }) {
   const [experienceOutput, setExperienceOutput] =
     useState<ExperienceOutput>(null);
   const [projectsOutput, setProjectsOutput] = useState<ProjectsOutput>(null);
+  const [techDefined, setTechDefined] = useState(false);
+  const [techOutputs, setTechOutputs] = useState<TechOutputs>({});
 
   return (
     <Ctx.Provider
@@ -50,6 +70,10 @@ export function InstallProvider({ children }: { children: ReactNode }) {
         setExperienceOutput,
         projectsOutput,
         setProjectsOutput,
+        techDefined,
+        setTechDefined,
+        techOutputs,
+        setTechOutputs,
       }}
     >
       {children}

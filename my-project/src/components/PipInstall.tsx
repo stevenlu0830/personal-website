@@ -28,10 +28,21 @@ export default function PipInstall() {
 
   return (
     <div className="mt-10 w-full text-left">
+      {/* Run button — above the box, right-aligned */}
+      <div className="mb-2 flex justify-end">
+        <button
+          type="button"
+          onClick={run}
+          disabled={state === "running"}
+          className="rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af] disabled:opacity-60"
+        >
+          {state === "running" ? "Running…" : "▶ Run"}
+        </button>
+      </div>
       <div className="rounded border border-border bg-surface">
-        {/* read-only code + Run button */}
-        <div className="flex items-center gap-3 px-4 py-3">
-          <code className="flex-1 select-none text-sm leading-relaxed">
+        {/* read-only code — scrolls horizontally instead of wrapping */}
+        <div className="overflow-x-auto px-4 py-3">
+          <code className="block select-none whitespace-nowrap text-sm leading-relaxed">
             <span className="block text-[#6a9955]">
               # Run this before running all code boxes below
             </span>
@@ -40,14 +51,6 @@ export default function PipInstall() {
               <span className="text-[#dddddd]">pip install stevenlu0830</span>
             </span>
           </code>
-          <button
-            type="button"
-            onClick={run}
-            disabled={state === "running"}
-            className="shrink-0 rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af] disabled:opacity-60"
-          >
-            {state === "running" ? "Running…" : "▶ Run"}
-          </button>
         </div>
 
         {/* simulated CLI output */}

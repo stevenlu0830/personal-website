@@ -12,10 +12,20 @@ export default function ExperienceRunner() {
 
   return (
     <section id="experience" className="mt-20">
+      {/* Run button — above the box, right-aligned */}
+      <div className="mb-2 flex justify-end">
+        <button
+          type="button"
+          onClick={run}
+          className="rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af]"
+        >
+          ▶ Run
+        </button>
+      </div>
       <div className="rounded border border-border bg-surface">
-        {/* read-only 3-line code + Run button */}
-        <div className="flex items-center gap-3 px-4 py-3">
-          <code className="flex-1 select-none text-sm leading-relaxed">
+        {/* read-only code — scrolls horizontally instead of wrapping */}
+        <div className="overflow-x-auto px-4 py-3">
+          <code className="block select-none whitespace-nowrap text-sm leading-relaxed">
             <span className="block">
               <span className="text-[#c586c0]">from </span>
               <span className="text-[#4fc9af]">stevenlu0830</span>
@@ -36,13 +46,6 @@ export default function ExperienceRunner() {
               <span className="text-[#ffd800]">()</span>
             </span>
           </code>
-          <button
-            type="button"
-            onClick={run}
-            className="shrink-0 rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af]"
-          >
-            ▶ Run
-          </button>
         </div>
 
         {/* simulated output: the experience buttons, or a NameError */}
