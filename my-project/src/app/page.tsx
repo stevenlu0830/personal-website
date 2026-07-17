@@ -1,16 +1,15 @@
 import Image from "next/image";
-import Link from "next/link";
 import avatar from "../../icons/avatar.jpg";
 import SiteNav from "@/components/SiteNav";
 import PipInstall from "@/components/PipInstall";
 import AboutRunner from "@/components/AboutRunner";
 import ExperienceRunner from "@/components/ExperienceRunner";
+import ProjectsRunner from "@/components/ProjectsRunner";
 import {
-  ProjectCard,
   CertificationCard,
   VolunteeringCard,
+  ViewAllButton,
 } from "@/components/cards";
-import { PROJECTS } from "@/data/projects";
 import { CERTIFICATIONS } from "@/data/certifications";
 import { VOLUNTEERING } from "@/data/volunteering";
 
@@ -164,17 +163,6 @@ function Section({
 }
 
 
-function ViewAllButton({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="block rounded border border-border bg-surface px-5 py-3 text-center text-sm text-[#dcdcaa] transition-colors hover:border-[#dcdcaa] sm:hidden"
-    >
-      {label} <span aria-hidden="true">→</span>
-    </Link>
-  );
-}
-
 function SongList({
   title,
   songs,
@@ -241,20 +229,7 @@ export default function Home() {
         <ExperienceRunner />
 
         {/* Projects */}
-        <Section id="projects" title="👨🏻‍💻 Projects">
-          <div className="grid gap-6 sm:grid-cols-2">
-            {PROJECTS.map((p, i) => (
-              <ProjectCard
-                key={p.slug}
-                project={p}
-                className={i >= 2 ? "max-sm:hidden" : ""}
-              />
-            ))}
-          </div>
-          {PROJECTS.length > 2 && (
-            <ViewAllButton href="/projects" label="View All Projects" />
-          )}
-        </Section>
+        <ProjectsRunner />
 
         {/* Technical Skills */}
         <Section id="skills" title="🦾 Technical Skills">

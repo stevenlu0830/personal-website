@@ -4,6 +4,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 
 type AboutOutput = null | "intro" | "error";
 type ExperienceOutput = null | "cards" | "error";
+type ProjectsOutput = null | "grid" | "error";
 
 type CellCtx = {
   installed: boolean;
@@ -12,6 +13,8 @@ type CellCtx = {
   setAboutOutput: (v: AboutOutput) => void;
   experienceOutput: ExperienceOutput;
   setExperienceOutput: (v: ExperienceOutput) => void;
+  projectsOutput: ProjectsOutput;
+  setProjectsOutput: (v: ProjectsOutput) => void;
 };
 
 const Ctx = createContext<CellCtx>({
@@ -21,6 +24,8 @@ const Ctx = createContext<CellCtx>({
   setAboutOutput: () => {},
   experienceOutput: null,
   setExperienceOutput: () => {},
+  projectsOutput: null,
+  setProjectsOutput: () => {},
 });
 
 // Holds the interactive code-cell state (pip installed, About / Experience
@@ -32,6 +37,7 @@ export function InstallProvider({ children }: { children: ReactNode }) {
   const [aboutOutput, setAboutOutput] = useState<AboutOutput>(null);
   const [experienceOutput, setExperienceOutput] =
     useState<ExperienceOutput>(null);
+  const [projectsOutput, setProjectsOutput] = useState<ProjectsOutput>(null);
 
   return (
     <Ctx.Provider
@@ -42,6 +48,8 @@ export function InstallProvider({ children }: { children: ReactNode }) {
         setAboutOutput,
         experienceOutput,
         setExperienceOutput,
+        projectsOutput,
+        setProjectsOutput,
       }}
     >
       {children}

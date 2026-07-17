@@ -26,6 +26,24 @@ export function SkillTag({ label }: { label: string }) {
   );
 }
 
+// Mobile-only "View All" button shown below a truncated card list.
+export function ViewAllButton({
+  href,
+  label,
+}: {
+  href: string;
+  label: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="block rounded border border-border bg-surface px-5 py-3 text-center text-sm text-[#dcdcaa] transition-colors hover:border-[#dcdcaa] sm:hidden"
+    >
+      {label} <span aria-hidden="true">→</span>
+    </Link>
+  );
+}
+
 export function ExperienceCard({ job }: { job: Job }) {
   return (
     <Link href={`/experience/${job.slug}`} className={CARD_BASE}>
