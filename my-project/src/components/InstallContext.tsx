@@ -12,7 +12,8 @@ import {
 type AboutOutput = null | "intro" | "error";
 type ExperienceOutput = null | "cards" | "error";
 type ProjectsOutput = null | "grid" | "error";
-type TechOutputs = Record<string, "ok" | "error">;
+type SimpleOutput = null | "ok" | "error";
+type MultiOutputs = Record<string, "ok" | "error">;
 
 type CellCtx = {
   installed: boolean;
@@ -27,8 +28,22 @@ type CellCtx = {
   // cell's output keyed by category.
   techDefined: boolean;
   setTechDefined: (v: boolean) => void;
-  techOutputs: TechOutputs;
-  setTechOutputs: Dispatch<SetStateAction<TechOutputs>>;
+  techOutputs: MultiOutputs;
+  setTechOutputs: Dispatch<SetStateAction<MultiOutputs>>;
+  // Single-cell sections
+  educationOutput: SimpleOutput;
+  setEducationOutput: (v: SimpleOutput) => void;
+  coursesOutput: SimpleOutput;
+  setCoursesOutput: (v: SimpleOutput) => void;
+  certsOutput: SimpleOutput;
+  setCertsOutput: (v: SimpleOutput) => void;
+  volunteeringOutput: SimpleOutput;
+  setVolunteeringOutput: (v: SimpleOutput) => void;
+  // Fun Facts: whether the first cell defined `fun_facts`, plus per-cell output.
+  funDefined: boolean;
+  setFunDefined: (v: boolean) => void;
+  funOutputs: MultiOutputs;
+  setFunOutputs: Dispatch<SetStateAction<MultiOutputs>>;
 };
 
 const Ctx = createContext<CellCtx>({
@@ -44,6 +59,18 @@ const Ctx = createContext<CellCtx>({
   setTechDefined: () => {},
   techOutputs: {},
   setTechOutputs: () => {},
+  educationOutput: null,
+  setEducationOutput: () => {},
+  coursesOutput: null,
+  setCoursesOutput: () => {},
+  certsOutput: null,
+  setCertsOutput: () => {},
+  volunteeringOutput: null,
+  setVolunteeringOutput: () => {},
+  funDefined: false,
+  setFunDefined: () => {},
+  funOutputs: {},
+  setFunOutputs: () => {},
 });
 
 // Holds the interactive code-cell state (pip installed, About / Experience
@@ -57,7 +84,14 @@ export function InstallProvider({ children }: { children: ReactNode }) {
     useState<ExperienceOutput>(null);
   const [projectsOutput, setProjectsOutput] = useState<ProjectsOutput>(null);
   const [techDefined, setTechDefined] = useState(false);
-  const [techOutputs, setTechOutputs] = useState<TechOutputs>({});
+  const [techOutputs, setTechOutputs] = useState<MultiOutputs>({});
+  const [educationOutput, setEducationOutput] = useState<SimpleOutput>(null);
+  const [coursesOutput, setCoursesOutput] = useState<SimpleOutput>(null);
+  const [certsOutput, setCertsOutput] = useState<SimpleOutput>(null);
+  const [volunteeringOutput, setVolunteeringOutput] =
+    useState<SimpleOutput>(null);
+  const [funDefined, setFunDefined] = useState(false);
+  const [funOutputs, setFunOutputs] = useState<MultiOutputs>({});
 
   return (
     <Ctx.Provider
@@ -74,6 +108,18 @@ export function InstallProvider({ children }: { children: ReactNode }) {
         setTechDefined,
         techOutputs,
         setTechOutputs,
+        educationOutput,
+        setEducationOutput,
+        coursesOutput,
+        setCoursesOutput,
+        certsOutput,
+        setCertsOutput,
+        volunteeringOutput,
+        setVolunteeringOutput,
+        funDefined,
+        setFunDefined,
+        funOutputs,
+        setFunOutputs,
       }}
     >
       {children}

@@ -6,56 +6,11 @@ import AboutRunner from "@/components/AboutRunner";
 import ExperienceRunner from "@/components/ExperienceRunner";
 import ProjectsRunner from "@/components/ProjectsRunner";
 import TechSkillsRunner from "@/components/TechSkillsRunner";
-import {
-  CertificationCard,
-  VolunteeringCard,
-  ViewAllButton,
-} from "@/components/cards";
-import { CERTIFICATIONS } from "@/data/certifications";
-import { VOLUNTEERING } from "@/data/volunteering";
-
-const COURSES = [
-  { code: "CPSC 330", name: "Applied Machine Learning" },
-  { code: "CPSC 368", name: "Databases in Data Science" },
-  { code: "CPSC 320", name: "Intermediate Algorithm Analysis and Design" },
-  { code: "CPSC 322", name: "Introduction to Artificial Intelligence" },
-  { code: "CPSC 310", name: "Introduction to Software Engineering" },
-  { code: "CPSC 221", name: "Data Structures and Algorithms" },
-  { code: "CPSC 213", name: "Introduction to Computer Systems" },
-  { code: "CPSC 210", name: "Software Construction" },
-  { code: "CPSC 110", name: "Computation, Programs, and Programming" },
-  { code: "CPSC 121", name: "Models of Computation" },
-];
-
-const SONGS_CANTOPOP = [
-  {
-    label: "張敬軒 Hins Cheung — 隱形遊樂場 Imaginary Fairground",
-    href: "https://www.youtube.com/watch?v=y9ntnHvD4tQ",
-  },
-  {
-    label: "林家謙 Terence Lam — 特倫斯夢遊仙境 Wonderland",
-    href: "https://www.youtube.com/watch?v=i2lIeLceOQg",
-  },
-  {
-    label: "MC 張天賦 — 小心地滑 Caution Wet Floor",
-    href: "https://www.youtube.com/watch?v=FlsxLlozYdw",
-  },
-];
-
-const SONGS_OTHER = [
-  {
-    label: "sombr — back to friends",
-    href: "https://www.youtube.com/watch?v=c8zq4kAn_O0",
-  },
-  {
-    label: "The Weeknd — Blinding Lights",
-    href: "https://www.youtube.com/watch?v=4NRXx6U8ABQ",
-  },
-  {
-    label: "Owl City & Carly Rae Jepsen — Good Time",
-    href: "https://www.youtube.com/watch?v=H7HmzwI67ec",
-  },
-];
+import EducationRunner from "@/components/EducationRunner";
+import CoursesRunner from "@/components/CoursesRunner";
+import CertificationsRunner from "@/components/CertificationsRunner";
+import VolunteeringRunner from "@/components/VolunteeringRunner";
+import FunFactsRunner from "@/components/FunFactsRunner";
 
 const CONTACTS: {
   type: string;
@@ -109,37 +64,6 @@ function Section({
 }
 
 
-function SongList({
-  title,
-  songs,
-}: {
-  title: string;
-  songs: { label: string; href: string }[];
-}) {
-  return (
-    <div>
-      <h3 className="font-bold text-[#dcdcaa]">{title}</h3>
-      <ul className="mt-2 space-y-1 text-sm">
-        {songs.map((s) => (
-          <li key={s.href}>
-            <span aria-hidden="true" className="text-[#9ddcff]">
-              ♪{" "}
-            </span>
-            <a
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#9ddcff] underline decoration-border underline-offset-4 transition-colors hover:text-[#4a90c2]"
-            >
-              {s.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <div>
@@ -182,96 +106,19 @@ export default function Home() {
         <TechSkillsRunner />
 
         {/* Education */}
-        <Section id="education" title="📚 Education">
-          {[
-            {
-              school: "The University of British Columbia",
-              degree: "Bachelor of Science (BSc), Computer Science",
-              years: "Sep 2023 – Apr 2028 · GPA: 3.8",
-            },
-            {
-              school: "Chan Sui Ki (La Salle) College",
-              degree: "Secondary",
-              years: "Sep 2017 – Aug 2023",
-            },
-          ].map((edu) => (
-            <div key={edu.school} className="border-l-2 border-border pl-5">
-              <h3 className="text-lg font-bold text-[#dcdcaa]">{edu.school}</h3>
-              <p className="text-[#9ddcff]">{edu.degree}</p>
-              <p className="text-sm text-[#9ddcff]">{edu.years}</p>
-            </div>
-          ))}
-        </Section>
+        <EducationRunner />
 
         {/* Relevant Courses */}
-        <Section id="courses" title="👨🏻‍🏫 Relevant Courses">
-          <ul className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
-            {COURSES.map((c) => (
-              <li key={c.code} className="flex gap-3">
-                <span className="shrink-0 text-[#dcdcaa]">{c.code}</span>
-                <span className="text-muted">{c.name}</span>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <CoursesRunner />
 
         {/* Certifications */}
-        <Section id="certifications" title="🌟 Certifications">
-          {CERTIFICATIONS.map((cert, i) => (
-            <CertificationCard
-              key={cert.slug}
-              cert={cert}
-              className={i >= 2 ? "max-sm:hidden" : ""}
-            />
-          ))}
-          {CERTIFICATIONS.length > 2 && (
-            <ViewAllButton
-              href="/certifications"
-              label="View All Certifications"
-            />
-          )}
-        </Section>
+        <CertificationsRunner />
 
         {/* Volunteering */}
-        <Section id="volunteering" title="💁🏻‍♂️ Volunteering">
-          {VOLUNTEERING.map((role, i) => (
-            <VolunteeringCard
-              key={role.slug}
-              role={role}
-              className={i >= 2 ? "max-sm:hidden" : ""}
-            />
-          ))}
-          {VOLUNTEERING.length > 2 && (
-            <ViewAllButton href="/volunteering" label="View All Volunteering" />
-          )}
-        </Section>
+        <VolunteeringRunner />
 
         {/* Fun Facts */}
-        <Section id="fun-facts" title="🤡 Fun Facts">
-          <div>
-            <h3 className="font-bold text-[#dcdcaa]">
-              Bucket-list Traveling Destinations
-            </h3>
-            <ul className="mt-2 space-y-1 text-sm text-muted">
-              {[
-                "London @ UK",
-                "Montreal @ Canada",
-                "Somewhere in Malaysia — haven't decided yet",
-                "Turkey",
-              ].map((place) => (
-                <li key={place}>
-                  <span aria-hidden="true">✈ </span>
-                  {place}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <SongList title="Favourite Canto-pop Songs" songs={SONGS_CANTOPOP} />
-          <SongList
-            title="Favourite Songs (other than Canto-pop)"
-            songs={SONGS_OTHER}
-          />
-        </Section>
+        <FunFactsRunner />
 
         {/* Contacts — TODO: replace the placeholder links below with your real
             LinkedIn URL, email address, and GitHub username before publishing */}

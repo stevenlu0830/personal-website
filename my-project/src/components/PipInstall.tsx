@@ -26,7 +26,6 @@ export default function PipInstall() {
   const showOutput = state !== "idle" || installed;
   const showSuccess = state === "done" || installed;
 
-  // test git commit
   return (
     <div className="mt-10 w-full text-left">
       {/* Run button — above the box, right-aligned */}
