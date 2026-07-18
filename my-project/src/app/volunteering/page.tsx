@@ -11,7 +11,7 @@ export default function AllVolunteeringPage() {
       <BackButton fallback="/#volunteering" label="Back to home" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">All Volunteering</h1>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">All Volunteering</h1>
         <div className="mt-8 space-y-6">
           {VOLUNTEERING.map((role) => (
             <VolunteeringCard key={role.slug} role={role} />

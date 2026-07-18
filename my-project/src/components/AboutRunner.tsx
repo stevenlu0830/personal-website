@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 
 const INTRO = [
@@ -8,11 +9,17 @@ const INTRO = [
 ];
 
 export default function AboutRunner() {
-  const { installed, aboutOutput: output, setAboutOutput } = useInstall();
+  const { installed, runAllToken, aboutOutput: output, setAboutOutput } =
+    useInstall();
 
   // Capture the result at the moment Run is clicked (like a real REPL cell),
   // so it doesn't change on its own if the install state changes afterwards.
   const run = () => setAboutOutput(installed ? "intro" : "error");
+
+  // "Run all" from the pip cell runs this cell too.
+  useEffect(() => {
+    if (runAllToken > 0) setAboutOutput("intro");
+  }, [runAllToken, setAboutOutput]);
 
   return (
     <section id="about" className="mt-20">
@@ -21,7 +28,7 @@ export default function AboutRunner() {
         <button
           type="button"
           onClick={run}
-          className="rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af]"
+          className="rounded border border-border px-3 py-1 text-sm text-[var(--cli)] transition-colors hover:border-[var(--accent)]"
         >
           ▶ Run
         </button>
@@ -30,27 +37,27 @@ export default function AboutRunner() {
         {/* read-only code — scrolls horizontally instead of wrapping */}
         <div className="overflow-x-auto px-4 py-3">
           <code className="block select-none whitespace-nowrap text-sm leading-relaxed">
-            <span className="block text-[#6a9955]">
+            <span className="block text-[var(--comment)]">
               # Reminder: Run the above code box first
             </span>
             <span className="block">
-              <span className="text-[#c586c0]">from </span>
-              <span className="text-[#4fc9af]">stevenlu0830</span>
-              <span className="text-[#c586c0]"> import </span>
-              <span className="text-[#4fc9af]">About</span>
+              <span className="text-[var(--keyword)]">from </span>
+              <span className="text-[var(--accent)]">stevenlu0830</span>
+              <span className="text-[var(--keyword)]"> import </span>
+              <span className="text-[var(--accent)]">About</span>
             </span>
             <span className="block">&nbsp;</span>
             <span className="block">
-              <span className="text-[#9ddcff]">about_myself</span>
-              <span className="text-[#dddddd]"> = </span>
-              <span className="text-[#4fc9af]">About</span>
-              <span className="text-[#ffd800]">()</span>
+              <span className="text-[var(--muted)]">about_myself</span>
+              <span className="text-[var(--cli)]"> = </span>
+              <span className="text-[var(--accent)]">About</span>
+              <span className="text-[var(--bracket)]">()</span>
             </span>
             <span className="block">
-              <span className="text-[#9ddcff]">about_myself</span>
-              <span className="text-[#dddddd]">.</span>
-              <span className="text-[#dcdcaa]">display</span>
-              <span className="text-[#ffd800]">()</span>
+              <span className="text-[var(--muted)]">about_myself</span>
+              <span className="text-[var(--cli)]">.</span>
+              <span className="text-[var(--fn)]">display</span>
+              <span className="text-[var(--bracket)]">()</span>
             </span>
           </code>
         </div>
@@ -60,15 +67,15 @@ export default function AboutRunner() {
           <div className="border-t border-border px-4 py-3 text-sm leading-relaxed">
             {output === "intro" ? (
               INTRO.map((p, i) => (
-                <p key={i} className={`text-[#dddddd] ${i > 0 ? "mt-3" : ""}`}>
+                <p key={i} className={`text-[var(--cli)] ${i > 0 ? "mt-3" : ""}`}>
                   {p}
                 </p>
               ))
             ) : (
               <p>
-                <span className="text-[#d670d6]">NameError</span>
-                <span className="text-[#dddddd]">: </span>
-                <span className="text-[#c152be]">
+                <span className="text-[var(--errname)]">NameError</span>
+                <span className="text-[var(--cli)]">: </span>
+                <span className="text-[var(--errmsg)]">
                   name &apos;About&apos; is not defined
                 </span>
               </p>

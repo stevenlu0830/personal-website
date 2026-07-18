@@ -31,16 +31,16 @@ export default async function VolunteeringPage({
       <BackButton fallback="/#volunteering" label="Back to Volunteering" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">{role.title}</h1>
-        <p className="mt-3 text-[#9ddcff]">{role.org}</p>
-        <p className="mt-1 text-sm text-[#9ddcff]">{role.meta}</p>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">{role.title}</h1>
+        <p className="mt-3 text-[var(--muted)]">{role.org}</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">{role.meta}</p>
 
         {role.bullets.length > 0 && (
           <section className="mt-10">
-            <ul className="mt-4 space-y-3 leading-relaxed text-[#dea893]">
+            <ul className="mt-4 space-y-3 leading-relaxed text-[var(--foreground)]">
               {role.bullets.map((b) => (
                 <li key={b}>
-                  <span aria-hidden="true" className="text-[#dea893]">
+                  <span aria-hidden="true" className="text-[var(--foreground)]">
                     -{" "}
                   </span>
                   {b}

@@ -31,16 +31,16 @@ export default async function JobPage({
       <BackButton fallback="/#experience" label="Back to Experience" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">{job.title}</h1>
-        <p className="mt-3 text-[#9ddcff]">{job.org}</p>
-        <p className="mt-1 text-sm text-[#9ddcff]">{job.meta}</p>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">{job.title}</h1>
+        <p className="mt-3 text-[var(--muted)]">{job.org}</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">{job.meta}</p>
 
         {job.bullets.length > 0 && (
           <section className="mt-10">
-            <ul className="mt-4 space-y-3 leading-relaxed text-[#dea893]">
+            <ul className="mt-4 space-y-3 leading-relaxed text-[var(--foreground)]">
               {job.bullets.map((b) => (
                 <li key={b}>
-                  <span aria-hidden="true" className="text-[#dea893]">
+                  <span aria-hidden="true" className="text-[var(--foreground)]">
                     -{" "}
                   </span>
                   {b}

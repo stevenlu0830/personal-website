@@ -28,7 +28,7 @@ export function CodeCell({
           type="button"
           onClick={onRun}
           disabled={disabled}
-          className="rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af] disabled:opacity-60"
+          className="rounded border border-border px-3 py-1 text-sm text-[var(--cli)] transition-colors hover:border-[var(--accent)] disabled:opacity-60"
         >
           {runLabel}
         </button>
@@ -63,12 +63,12 @@ export function DisplayLine({
 }) {
   return (
     <span className="block">
-      <span className="text-[#9ddcff]">{variable}</span>
-      <span className="text-[#dddddd]">.</span>
-      <span className="text-[#dcdcaa]">display</span>
-      <span className="text-[#ffd800]">(</span>
-      {arg && <span className="text-[#dea893]">&apos;{arg}&apos;</span>}
-      <span className="text-[#ffd800]">)</span>
+      <span className="text-[var(--muted)]">{variable}</span>
+      <span className="text-[var(--cli)]">.</span>
+      <span className="text-[var(--fn)]">display</span>
+      <span className="text-[var(--bracket)]">(</span>
+      {arg && <span className="text-[var(--foreground)]">&apos;{arg}&apos;</span>}
+      <span className="text-[var(--bracket)]">)</span>
     </span>
   );
 }
@@ -86,17 +86,17 @@ export function ImportCode({
   return (
     <>
       <span className="block">
-        <span className="text-[#c586c0]">from </span>
-        <span className="text-[#4fc9af]">stevenlu0830</span>
-        <span className="text-[#c586c0]"> import </span>
-        <span className="text-[#4fc9af]">{cls}</span>
+        <span className="text-[var(--keyword)]">from </span>
+        <span className="text-[var(--accent)]">stevenlu0830</span>
+        <span className="text-[var(--keyword)]"> import </span>
+        <span className="text-[var(--accent)]">{cls}</span>
       </span>
       <span className="block">&nbsp;</span>
       <span className="block">
-        <span className="text-[#9ddcff]">{variable}</span>
-        <span className="text-[#dddddd]"> = </span>
-        <span className="text-[#4fc9af]">{cls}</span>
-        <span className="text-[#ffd800]">()</span>
+        <span className="text-[var(--muted)]">{variable}</span>
+        <span className="text-[var(--cli)]"> = </span>
+        <span className="text-[var(--accent)]">{cls}</span>
+        <span className="text-[var(--bracket)]">()</span>
       </span>
       <DisplayLine variable={variable} arg={arg} />
     </>
@@ -107,9 +107,9 @@ export function ImportCode({
 export function NameErrorLine({ name }: { name: string }) {
   return (
     <p>
-      <span className="text-[#d670d6]">NameError</span>
-      <span className="text-[#dddddd]">: </span>
-      <span className="text-[#c152be]">
+      <span className="text-[var(--errname)]">NameError</span>
+      <span className="text-[var(--cli)]">: </span>
+      <span className="text-[var(--errmsg)]">
         name &apos;{name}&apos; is not defined
       </span>
     </p>
@@ -120,7 +120,7 @@ export function NameErrorLine({ name }: { name: string }) {
 // list-of-dicts repr, in console white.
 export function DictList({ rows }: { rows: Record<string, string>[] }) {
   return (
-    <div className="text-[#dddddd]">
+    <div className="text-[var(--cli)]">
       {rows.map((row, i) => {
         const inner = Object.entries(row)
           .map(([k, v]) => `'${k}': '${v}'`)

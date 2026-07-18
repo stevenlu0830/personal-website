@@ -79,13 +79,13 @@ export default function Home() {
             priority
             className="mx-auto h-36 w-36 rounded-full border-2 border-border object-cover"
           />
-          <h1 className="mt-6 text-5xl font-bold tracking-tight text-[#4fc9af]">
+          <h1 className="mt-6 text-5xl font-bold tracking-tight text-[var(--accent)]">
             Steven Lu
           </h1>
-          <p className="mt-4 text-[#dea893]">
+          <p className="mt-4 text-[var(--foreground)]">
             Computer Science (AI Option) @ The University of British Columbia
           </p>
-          <p className="mt-2 text-sm text-[#dea893]">
+          <p className="mt-2 text-sm text-[var(--foreground)]">
             AI · Machine Learning · Software Engineering · Data Science · Web
             Development
           </p>
@@ -148,13 +148,13 @@ export default function Home() {
           <ul className="space-y-2 text-sm">
             {CONTACTS.map((c) => (
               <li key={c.type}>
-                <span className="text-[#dcdcaa]">{c.type}: </span>
+                <span className="text-[var(--fn)]">{c.type}: </span>
                 <a
                   href={c.href}
                   {...(c.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="text-[#9ddcff] underline decoration-border underline-offset-4 transition-colors hover:text-[#4a90c2]"
+                  className="text-[var(--muted)] underline decoration-border underline-offset-4 transition-colors hover:text-[var(--linkhover)]"
                 >
                   {c.text}
                 </a>
@@ -165,7 +165,7 @@ export default function Home() {
 
         </main>
 
-        <footer className="mx-auto max-w-4xl border-t border-border px-6 py-6 text-center text-xs text-[#dea893]">
+        <footer className="mx-auto max-w-4xl border-t border-border px-6 py-6 text-center text-xs text-[var(--foreground)]">
           <p>© 2026 Steven Lu · Built with Next.js</p>
         </footer>
       </div>

@@ -1,13 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { CodeCell, ImportCode, NameErrorLine } from "./codecell";
 import { VolunteeringCard, ViewAllButton } from "./cards";
 import { VOLUNTEERING } from "@/data/volunteering";
 
 export default function VolunteeringRunner() {
-  const { installed, volunteeringOutput, setVolunteeringOutput } = useInstall();
+  const { installed, runAllToken, volunteeringOutput, setVolunteeringOutput } =
+    useInstall();
   const run = () => setVolunteeringOutput(installed ? "ok" : "error");
+
+  useEffect(() => {
+    if (runAllToken > 0) setVolunteeringOutput("ok");
+  }, [runAllToken, setVolunteeringOutput]);
 
   return (
     <section id="volunteering" className="mt-20">

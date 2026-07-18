@@ -32,14 +32,14 @@ export default async function ProjectPage({
       <BackButton fallback="/#projects" label="Back to Projects" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">{project.name}</h1>
-        <p className="mt-3 text-sm text-[#9ddcff]">{project.dates}</p>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">{project.name}</h1>
+        <p className="mt-3 text-sm text-[var(--muted)]">{project.dates}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {project.skills.map((s) => (
             <span
               key={s}
-              className="inline-block rounded border border-border bg-surface px-2 py-0.5 text-xs text-[#9ddcff]"
+              className="inline-block rounded border border-border bg-surface px-2 py-0.5 text-xs text-[var(--muted)]"
             >
               {s}
             </span>
@@ -47,7 +47,7 @@ export default async function ProjectPage({
         </div>
 
         <section className="mt-10">
-          <div className="mt-4 space-y-4 leading-relaxed text-[#dea893]">
+          <div className="mt-4 space-y-4 leading-relaxed text-[var(--foreground)]">
             <p>{project.context}</p>
             {(Array.isArray(project.description)
               ? project.description
@@ -77,7 +77,7 @@ export default async function ProjectPage({
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block rounded border border-border bg-surface px-3 py-1 text-sm text-[#9ddcff] transition-colors hover:border-[#dcdcaa]"
+                    className="inline-block rounded border border-border bg-surface px-3 py-1 text-sm text-[var(--muted)] transition-colors hover:border-[var(--fn)]"
                   >
                     {link.label} <span aria-hidden="true">↗</span>
                   </a>
@@ -91,7 +91,7 @@ export default async function ProjectPage({
                     href={attachment.src}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#9ddcff] transition-colors hover:text-[#dcdcaa]"
+                    className="text-[var(--muted)] transition-colors hover:text-[var(--fn)]"
                   >
                     {attachment.label} <span aria-hidden="true">↗</span>
                   </a>

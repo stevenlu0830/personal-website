@@ -11,7 +11,7 @@ export default function AllCertificationsPage() {
       <BackButton fallback="/#certifications" label="Back to home" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">All Certifications</h1>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">All Certifications</h1>
         <div className="mt-8 space-y-6">
           {CERTIFICATIONS.map((cert) => (
             <CertificationCard key={cert.slug} cert={cert} />

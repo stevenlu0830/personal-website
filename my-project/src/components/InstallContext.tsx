@@ -18,6 +18,10 @@ type MultiOutputs = Record<string, "ok" | "error">;
 type CellCtx = {
   installed: boolean;
   install: () => void;
+  // Incremented by "Run all" — every runner watches it and runs its success
+  // path (installed is set at the same time so all cells succeed).
+  runAllToken: number;
+  runAll: () => void;
   aboutOutput: AboutOutput;
   setAboutOutput: (v: AboutOutput) => void;
   experienceOutput: ExperienceOutput;
@@ -49,6 +53,8 @@ type CellCtx = {
 const Ctx = createContext<CellCtx>({
   installed: false,
   install: () => {},
+  runAllToken: 0,
+  runAll: () => {},
   aboutOutput: null,
   setAboutOutput: () => {},
   experienceOutput: null,
@@ -79,6 +85,7 @@ const Ctx = createContext<CellCtx>({
 // remounts the layout and resets every cell to "not run".
 export function InstallProvider({ children }: { children: ReactNode }) {
   const [installed, setInstalled] = useState(false);
+  const [runAllToken, setRunAllToken] = useState(0);
   const [aboutOutput, setAboutOutput] = useState<AboutOutput>(null);
   const [experienceOutput, setExperienceOutput] =
     useState<ExperienceOutput>(null);
@@ -98,6 +105,11 @@ export function InstallProvider({ children }: { children: ReactNode }) {
       value={{
         installed,
         install: () => setInstalled(true),
+        runAllToken,
+        runAll: () => {
+          setInstalled(true);
+          setRunAllToken((t) => t + 1);
+        },
         aboutOutput,
         setAboutOutput,
         experienceOutput,

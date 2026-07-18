@@ -31,9 +31,9 @@ export default async function CertificationPage({
       <BackButton fallback="/#certifications" label="Back to Certifications" />
 
       <main className="mx-auto max-w-4xl px-6 py-24">
-        <h1 className="text-3xl font-bold text-[#dcdcaa]">{cert.name}</h1>
-        <p className="mt-3 text-[#9ddcff]">{cert.org}</p>
-        <p className="mt-1 text-sm text-[#9ddcff]">{cert.meta}</p>
+        <h1 className="text-3xl font-bold text-[var(--fn)]">{cert.name}</h1>
+        <p className="mt-3 text-[var(--muted)]">{cert.org}</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">{cert.meta}</p>
 
         {cert.pdf && (
           <figure className="mt-10">
@@ -42,7 +42,7 @@ export default async function CertificationPage({
                 href={cert.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#9ddcff] transition-colors hover:text-[#dcdcaa]"
+                className="text-[var(--muted)] transition-colors hover:text-[var(--fn)]"
               >
                 {cert.name} <span aria-hidden="true">↗</span>
               </a>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import avatar from "../../icons/avatar.jpg";
+import { ThemeToggle } from "./ThemeContext";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
@@ -49,11 +50,12 @@ export default function SiteNav() {
           key={item.href}
           href={item.href}
           onClick={onNavigate}
-          className="text-[#4fc9af] transition-colors hover:text-[#9ddcff]"
+          className="text-[var(--accent)] transition-colors hover:text-[var(--muted)]"
         >
           {item.label}
         </a>
       ))}
+      <ThemeToggle />
     </>
   );
 

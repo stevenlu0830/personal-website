@@ -5,7 +5,7 @@ import type { Certification } from "@/data/certifications";
 import type { Volunteering } from "@/data/volunteering";
 
 const CARD_BASE =
-  "group block rounded border border-border bg-surface p-5 transition-colors hover:border-[#dcdcaa]";
+  "group block rounded border border-border bg-surface p-5 transition-colors hover:border-[var(--fn)]";
 
 function Arrow() {
   return (
@@ -37,7 +37,7 @@ export function ViewAllButton({
   return (
     <Link
       href={href}
-      className="block rounded border border-border bg-surface px-5 py-3 text-center text-sm text-[#dcdcaa] transition-colors hover:border-[#dcdcaa] sm:hidden"
+      className="block rounded border border-border bg-surface px-5 py-3 text-center text-sm text-[var(--fn)] transition-colors hover:border-[var(--fn)] sm:hidden"
     >
       {label} <span aria-hidden="true">→</span>
     </Link>
@@ -48,11 +48,11 @@ export function ExperienceCard({ job }: { job: Job }) {
   return (
     <Link href={`/experience/${job.slug}`} className={CARD_BASE}>
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="text-lg font-bold text-[#dcdcaa]">{job.title}</h3>
+        <h3 className="text-lg font-bold text-[var(--fn)]">{job.title}</h3>
         <Arrow />
       </div>
-      <p className="text-[#9ddcff]">{job.org}</p>
-      <p className="text-sm text-[#9ddcff]">{job.meta}</p>
+      <p className="text-[var(--muted)]">{job.org}</p>
+      <p className="text-sm text-[var(--muted)]">{job.meta}</p>
     </Link>
   );
 }
@@ -67,10 +67,10 @@ export function ProjectCard({
   return (
     <Link href={`/projects/${project.slug}`} className={`${CARD_BASE} ${className}`}>
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="text-lg font-bold text-[#dcdcaa]">{project.name}</h3>
+        <h3 className="text-lg font-bold text-[var(--fn)]">{project.name}</h3>
         <Arrow />
       </div>
-      <p className="mt-1 text-sm text-[#9ddcff]">{project.dates}</p>
+      <p className="mt-1 text-sm text-[var(--muted)]">{project.dates}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {project.skills.map((s) => (
           <SkillTag key={s} label={s} />
@@ -93,11 +93,11 @@ export function CertificationCard({
       className={`${CARD_BASE} ${className}`}
     >
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="text-lg font-bold text-[#dcdcaa]">{cert.name}</h3>
+        <h3 className="text-lg font-bold text-[var(--fn)]">{cert.name}</h3>
         <Arrow />
       </div>
-      <p className="text-[#9ddcff]">{cert.org}</p>
-      <p className="text-sm text-[#9ddcff]">{cert.meta}</p>
+      <p className="text-[var(--muted)]">{cert.org}</p>
+      <p className="text-sm text-[var(--muted)]">{cert.meta}</p>
     </Link>
   );
 }
@@ -115,11 +115,11 @@ export function VolunteeringCard({
       className={`${CARD_BASE} ${className}`}
     >
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="text-lg font-bold text-[#dcdcaa]">{role.title}</h3>
+        <h3 className="text-lg font-bold text-[var(--fn)]">{role.title}</h3>
         <Arrow />
       </div>
-      <p className="text-[#9ddcff]">{role.org}</p>
-      <p className="text-sm text-[#9ddcff]">{role.meta}</p>
+      <p className="text-[var(--muted)]">{role.org}</p>
+      <p className="text-sm text-[var(--muted)]">{role.meta}</p>
     </Link>
   );
 }

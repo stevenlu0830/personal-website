@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import {
   CodeCell,
@@ -19,7 +20,7 @@ import {
 // Bullet list of linked songs, printed in console white.
 function SongBullets({ songs }: { songs: Song[] }) {
   return (
-    <div className="text-[#dddddd]">
+    <div className="text-[var(--cli)]">
       {songs.map((s) => (
         <div key={s.href}>
           <span aria-hidden="true">♪ </span>
@@ -27,7 +28,7 @@ function SongBullets({ songs }: { songs: Song[] }) {
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-border underline-offset-4 transition-colors hover:text-[#4a90c2]"
+            className="underline decoration-border underline-offset-4 transition-colors hover:text-[var(--linkhover)]"
           >
             {s.label}
           </a>
@@ -43,8 +44,27 @@ const TRAVEL_ARG = "Bucket-list Travel Places";
 const LANG = "Spoken Languages";
 
 export default function FunFactsRunner() {
-  const { installed, funDefined, setFunDefined, funOutputs, setFunOutputs } =
-    useInstall();
+  const {
+    installed,
+    runAllToken,
+    funDefined,
+    setFunDefined,
+    funOutputs,
+    setFunOutputs,
+  } = useInstall();
+
+  // "Run all" runs every cell here: define fun_facts and fill all outputs.
+  useEffect(() => {
+    if (runAllToken > 0) {
+      setFunDefined(true);
+      setFunOutputs({
+        [TRAVEL_ARG]: "ok",
+        [CANTO]: "ok",
+        [OTHER]: "ok",
+        [LANG]: "ok",
+      });
+    }
+  }, [runAllToken, setFunDefined, setFunOutputs]);
 
   const runFirst = () => {
     if (installed) setFunDefined(true);
@@ -81,7 +101,7 @@ export default function FunFactsRunner() {
         onRun={() => runFollow(CANTO)}
         output={okOr(CANTO, <SongBullets songs={SONGS_CANTOPOP} />)}
       >
-        <span className="block text-[#6a9955]">
+        <span className="block text-[var(--comment)]">
           # Run the code box above before running the following three code boxes
         </span>
         <DisplayLine variable="fun_facts" arg={CANTO} />

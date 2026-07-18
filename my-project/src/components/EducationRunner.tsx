@@ -1,12 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { CodeCell, ImportCode, NameErrorLine } from "./codecell";
 import { EDUCATION } from "@/data/education";
 
 export default function EducationRunner() {
-  const { installed, educationOutput, setEducationOutput } = useInstall();
+  const { installed, runAllToken, educationOutput, setEducationOutput } =
+    useInstall();
   const run = () => setEducationOutput(installed ? "ok" : "error");
+
+  useEffect(() => {
+    if (runAllToken > 0) setEducationOutput("ok");
+  }, [runAllToken, setEducationOutput]);
 
   return (
     <section id="education" className="mt-20">
@@ -17,9 +23,9 @@ export default function EducationRunner() {
             <div className="space-y-4">
               {EDUCATION.map((e) => (
                 <div key={e.school}>
-                  <p className="font-bold text-[#dcdcaa]">{e.school}</p>
-                  <p className="text-[#9ddcff]">{e.degree}</p>
-                  <p className="text-[#9ddcff]">{e.years}</p>
+                  <p className="font-bold text-[var(--fn)]">{e.school}</p>
+                  <p className="text-[var(--muted)]">{e.degree}</p>
+                  <p className="text-[var(--muted)]">{e.years}</p>
                 </div>
               ))}
             </div>

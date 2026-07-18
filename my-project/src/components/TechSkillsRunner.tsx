@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { SKILLS, type Skill } from "@/data/skills";
 
@@ -8,7 +9,7 @@ import { SKILLS, type Skill } from "@/data/skills";
 // actual image where the icon string would be.
 function SkillListOutput({ items }: { items: Skill[] }) {
   return (
-    <div className="text-[#dddddd]">
+    <div className="text-[var(--cli)]">
       {items.map((item, i) => (
         <div key={item.name} className="whitespace-nowrap">
           {i === 0 ? "[" : ""}
@@ -35,9 +36,9 @@ function SkillListOutput({ items }: { items: Skill[] }) {
 function ErrorLine({ name }: { name: string }) {
   return (
     <p>
-      <span className="text-[#d670d6]">NameError</span>
-      <span className="text-[#dddddd]">: </span>
-      <span className="text-[#c152be]">
+      <span className="text-[var(--errname)]">NameError</span>
+      <span className="text-[var(--cli)]">: </span>
+      <span className="text-[var(--errmsg)]">
         name &apos;{name}&apos; is not defined
       </span>
     </p>
@@ -45,8 +46,24 @@ function ErrorLine({ name }: { name: string }) {
 }
 
 export default function TechSkillsRunner() {
-  const { installed, techDefined, setTechDefined, techOutputs, setTechOutputs } =
-    useInstall();
+  const {
+    installed,
+    runAllToken,
+    techDefined,
+    setTechDefined,
+    techOutputs,
+    setTechOutputs,
+  } = useInstall();
+
+  // "Run all" runs every cell here: define tech_skills and fill all categories.
+  useEffect(() => {
+    if (runAllToken > 0) {
+      setTechDefined(true);
+      setTechOutputs(
+        Object.fromEntries(SKILLS.map((g) => [g.category, "ok" as const])),
+      );
+    }
+  }, [runAllToken, setTechDefined, setTechOutputs]);
 
   // First cell: imports TechnicalSkills and defines tech_skills (only if pip
   // was installed). Follow-up cells only work once tech_skills is defined.
@@ -79,7 +96,7 @@ export default function TechSkillsRunner() {
                 onClick={() =>
                   isFirst ? runFirst(group.category) : runFollow(group.category)
                 }
-                className="rounded border border-border px-3 py-1 text-sm text-[#dddddd] transition-colors hover:border-[#4fc9af]"
+                className="rounded border border-border px-3 py-1 text-sm text-[var(--cli)] transition-colors hover:border-[var(--accent)]"
               >
                 ▶ Run
               </button>
@@ -91,35 +108,35 @@ export default function TechSkillsRunner() {
                 {isFirst && (
                   <>
                     <span className="block">
-                      <span className="text-[#c586c0]">from </span>
-                      <span className="text-[#4fc9af]">stevenlu0830</span>
-                      <span className="text-[#c586c0]"> import </span>
-                      <span className="text-[#4fc9af]">TechnicalSkills</span>
+                      <span className="text-[var(--keyword)]">from </span>
+                      <span className="text-[var(--accent)]">stevenlu0830</span>
+                      <span className="text-[var(--keyword)]"> import </span>
+                      <span className="text-[var(--accent)]">TechnicalSkills</span>
                     </span>
                     <span className="block">&nbsp;</span>
                     <span className="block">
-                      <span className="text-[#9ddcff]">tech_skills</span>
-                      <span className="text-[#dddddd]"> = </span>
-                      <span className="text-[#4fc9af]">TechnicalSkills</span>
-                      <span className="text-[#ffd800]">()</span>
+                      <span className="text-[var(--muted)]">tech_skills</span>
+                      <span className="text-[var(--cli)]"> = </span>
+                      <span className="text-[var(--accent)]">TechnicalSkills</span>
+                      <span className="text-[var(--bracket)]">()</span>
                     </span>
                   </>
                 )}
                 {idx === 1 && (
-                  <span className="block text-[#6a9955]">
+                  <span className="block text-[var(--comment)]">
                     # Run the code box above before running the following three
                     code boxes
                   </span>
                 )}
                 <span className="block">
-                  <span className="text-[#9ddcff]">tech_skills</span>
-                  <span className="text-[#dddddd]">.</span>
-                  <span className="text-[#dcdcaa]">display</span>
-                  <span className="text-[#ffd800]">(</span>
-                  <span className="text-[#dea893]">
+                  <span className="text-[var(--muted)]">tech_skills</span>
+                  <span className="text-[var(--cli)]">.</span>
+                  <span className="text-[var(--fn)]">display</span>
+                  <span className="text-[var(--bracket)]">(</span>
+                  <span className="text-[var(--foreground)]">
                     &apos;{group.category}&apos;
                   </span>
-                  <span className="text-[#ffd800]">)</span>
+                  <span className="text-[var(--bracket)]">)</span>
                 </span>
               </code>
             </div>

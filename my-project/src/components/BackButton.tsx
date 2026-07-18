@@ -24,7 +24,7 @@ export default function BackButton({
           router.push(fallback);
         }
       }}
-      className="fixed left-6 top-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-border bg-surface text-muted transition-colors hover:border-[#dcdcaa] hover:text-[#dcdcaa]"
+      className="fixed left-6 top-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-border bg-surface text-muted transition-colors hover:border-[var(--fn)] hover:text-[var(--fn)]"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
