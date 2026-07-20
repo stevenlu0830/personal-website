@@ -1,18 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { CodeCell, ImportCode, NameErrorLine } from "./codecell";
 import { CertificationCard, ViewAllButton } from "./cards";
 import { CERTIFICATIONS } from "@/data/certifications";
 
 export default function CertificationsRunner() {
-  const { installed, runAllToken, certsOutput, setCertsOutput } = useInstall();
+  const { installed, certsOutput, setCertsOutput } = useInstall();
   const run = () => setCertsOutput(installed ? "ok" : "error");
-
-  useEffect(() => {
-    if (runAllToken > 0) setCertsOutput("ok");
-  }, [runAllToken, setCertsOutput]);
 
   return (
     <section id="certifications" className="mt-20">

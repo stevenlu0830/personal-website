@@ -183,9 +183,9 @@ export const PROJECTS: Project[] = [
     dates: "May 2024 – Jun 2024",
     context: "UBC DSCI-100 Course Project",
     description:
-      "Used nearly 1200 heart disease records from the UCI website to wrangle, analyze and visualize data. Developed a model to predict levels of heart disease based on factors such as age, blood pressure and maximum heart rate, and evaluated the performance of the model in terms of accuracy, precision and recall.",
+      "Used more than 900 heart disease records from the UCI website to wrangle, analyze and visualize data. Developed a model to predict levels of heart disease based on factors such as age, blood pressure and maximum heart rate, and evaluated the performance of the model in terms of accuracy, precision and recall.",
     bullets: [
-      "Analyzed more than 1200 heart disease records from the UCI Repository using the R language and its tidyverse package",
+      "Analyzed more than 900 heart disease records from the UCI Repository using the R language and its tidyverse package",
       "Wrangled data into a fit-for-purpose format and visualized selected data for the purpose of data analysis",
       "Used cross-validation to choose a suitable number of neighbors and the K-nearest neighbors model to predict levels of heart disease based on 13 factors including blood pressure and maximum heart rate",
       "Evaluated the performance of the model by finding its accuracy and calculating precision and recall",

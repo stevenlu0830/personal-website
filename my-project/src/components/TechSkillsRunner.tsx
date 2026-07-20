@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { SKILLS, type Skill } from "@/data/skills";
 
@@ -46,24 +45,8 @@ function ErrorLine({ name }: { name: string }) {
 }
 
 export default function TechSkillsRunner() {
-  const {
-    installed,
-    runAllToken,
-    techDefined,
-    setTechDefined,
-    techOutputs,
-    setTechOutputs,
-  } = useInstall();
-
-  // "Run all" runs every cell here: define tech_skills and fill all categories.
-  useEffect(() => {
-    if (runAllToken > 0) {
-      setTechDefined(true);
-      setTechOutputs(
-        Object.fromEntries(SKILLS.map((g) => [g.category, "ok" as const])),
-      );
-    }
-  }, [runAllToken, setTechDefined, setTechOutputs]);
+  const { installed, techDefined, setTechDefined, techOutputs, setTechOutputs } =
+    useInstall();
 
   // First cell: imports TechnicalSkills and defines tech_skills (only if pip
   // was installed). Follow-up cells only work once tech_skills is defined.

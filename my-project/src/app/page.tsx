@@ -11,38 +11,8 @@ import CoursesRunner from "@/components/CoursesRunner";
 import CertificationsRunner from "@/components/CertificationsRunner";
 import VolunteeringRunner from "@/components/VolunteeringRunner";
 import FunFactsRunner from "@/components/FunFactsRunner";
-
-const CONTACTS: {
-  type: string;
-  href: string;
-  text: string;
-  icon: string;
-  external: boolean;
-  invert?: boolean;
-}[] = [
-  {
-    type: "LinkedIn",
-    href: "https://www.linkedin.com/in/stevenlu0830/",
-    text: "linkedin.com/in/stevenlu0830",
-    icon: "/contact-icons/linkedin.svg.webp",
-    external: true,
-  },
-  {
-    type: "Email",
-    href: "mailto:stevenlu0830@gmail.com",
-    text: "stevenlu0830@gmail.com",
-    icon: "/contact-icons/gmail.svg.webp",
-    external: false,
-  },
-  {
-    type: "GitHub",
-    href: "https://github.com/stevenlu0830",
-    text: "github.com/stevenlu0830",
-    icon: "/contact-icons/github.png",
-    external: true,
-    invert: true,
-  },
-];
+import ContactIcons from "@/components/ContactIcons";
+import { CONTACTS } from "@/data/contacts";
 
 function Section({
   id,
@@ -123,28 +93,7 @@ export default function Home() {
         {/* Contacts — TODO: replace the placeholder links below with your real
             LinkedIn URL, email address, and GitHub username before publishing */}
         <Section id="contacts" title="🤝 Contacts — Let's connect!">
-          <div className="flex gap-5">
-            {CONTACTS.map((c) => (
-              <a
-                key={c.type}
-                href={c.href}
-                aria-label={c.type}
-                {...(c.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="transition-transform hover:-translate-y-0.5"
-              >
-                <Image
-                  src={c.icon}
-                  alt={c.type}
-                  width={32}
-                  height={32}
-                  unoptimized
-                  className={`h-16 w-16 object-contain${c.invert ? " invert" : ""}`}
-                />
-              </a>
-            ))}
-          </div>
+          <ContactIcons />
           <ul className="space-y-2 text-sm">
             {CONTACTS.map((c) => (
               <li key={c.type}>

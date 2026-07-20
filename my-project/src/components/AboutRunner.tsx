@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 
 const INTRO = [
@@ -9,17 +8,11 @@ const INTRO = [
 ];
 
 export default function AboutRunner() {
-  const { installed, runAllToken, aboutOutput: output, setAboutOutput } =
-    useInstall();
+  const { installed, aboutOutput: output, setAboutOutput } = useInstall();
 
   // Capture the result at the moment Run is clicked (like a real REPL cell),
   // so it doesn't change on its own if the install state changes afterwards.
   const run = () => setAboutOutput(installed ? "intro" : "error");
-
-  // "Run all" from the pip cell runs this cell too.
-  useEffect(() => {
-    if (runAllToken > 0) setAboutOutput("intro");
-  }, [runAllToken, setAboutOutput]);
 
   return (
     <section id="about" className="mt-20">

@@ -8,6 +8,13 @@ import {
   type ReactNode,
   type SetStateAction,
 } from "react";
+import { SKILLS } from "@/data/skills";
+import {
+  TRAVEL_ARG,
+  CANTO_ARG,
+  OTHER_ARG,
+  LANG_ARG,
+} from "@/data/funfacts";
 
 type AboutOutput = null | "intro" | "error";
 type ExperienceOutput = null | "cards" | "error";
@@ -18,9 +25,7 @@ type MultiOutputs = Record<string, "ok" | "error">;
 type CellCtx = {
   installed: boolean;
   install: () => void;
-  // Incremented by "Run all" — every runner watches it and runs its success
-  // path (installed is set at the same time so all cells succeed).
-  runAllToken: number;
+  // Runs every cell in order, staggered 0.25s apart (top to bottom).
   runAll: () => void;
   aboutOutput: AboutOutput;
   setAboutOutput: (v: AboutOutput) => void;
@@ -53,7 +58,6 @@ type CellCtx = {
 const Ctx = createContext<CellCtx>({
   installed: false,
   install: () => {},
-  runAllToken: 0,
   runAll: () => {},
   aboutOutput: null,
   setAboutOutput: () => {},
@@ -85,7 +89,6 @@ const Ctx = createContext<CellCtx>({
 // remounts the layout and resets every cell to "not run".
 export function InstallProvider({ children }: { children: ReactNode }) {
   const [installed, setInstalled] = useState(false);
-  const [runAllToken, setRunAllToken] = useState(0);
   const [aboutOutput, setAboutOutput] = useState<AboutOutput>(null);
   const [experienceOutput, setExperienceOutput] =
     useState<ExperienceOutput>(null);
@@ -100,16 +103,44 @@ export function InstallProvider({ children }: { children: ReactNode }) {
   const [funDefined, setFunDefined] = useState(false);
   const [funOutputs, setFunOutputs] = useState<MultiOutputs>({});
 
+  // Run every cell top-to-bottom, each 0.25s after the previous one.
+  const runAll = () => {
+    const markTech = (category: string) =>
+      setTechOutputs((prev) => ({ ...prev, [category]: "ok" }));
+    const markFun = (arg: string) =>
+      setFunOutputs((prev) => ({ ...prev, [arg]: "ok" }));
+
+    const steps: (() => void)[] = [
+      () => setInstalled(true), // pip install
+      () => setAboutOutput("intro"),
+      () => setExperienceOutput("cards"),
+      () => setProjectsOutput("grid"),
+      () => {
+        setTechDefined(true);
+        markTech(SKILLS[0].category);
+      },
+      ...SKILLS.slice(1).map((g) => () => markTech(g.category)),
+      () => setEducationOutput("ok"),
+      () => setCoursesOutput("ok"),
+      () => setCertsOutput("ok"),
+      () => setVolunteeringOutput("ok"),
+      () => {
+        setFunDefined(true);
+        markFun(TRAVEL_ARG);
+      },
+      () => markFun(CANTO_ARG),
+      () => markFun(OTHER_ARG),
+      () => markFun(LANG_ARG),
+    ];
+    steps.forEach((step, i) => setTimeout(step, i * 250));
+  };
+
   return (
     <Ctx.Provider
       value={{
         installed,
         install: () => setInstalled(true),
-        runAllToken,
-        runAll: () => {
-          setInstalled(true);
-          setRunAllToken((t) => t + 1);
-        },
+        runAll,
         aboutOutput,
         setAboutOutput,
         experienceOutput,

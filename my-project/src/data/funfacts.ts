@@ -1,5 +1,11 @@
 export type Song = { label: string; href: string };
 
+// display() arguments — shared with the Run-all orchestrator.
+export const TRAVEL_ARG = "Bucket-list Travel Places";
+export const CANTO_ARG = "Favourite Canto-pop Songs";
+export const OTHER_ARG = "Favourite Songs other than Canto-pop";
+export const LANG_ARG = "Spoken Languages";
+
 export const TRAVEL: Record<string, string>[] = [
   { city: "London", country: "UK" },
   { city: "Montreal", country: "Canada" },

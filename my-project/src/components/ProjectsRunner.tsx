@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { ProjectCard, ViewAllButton } from "./cards";
 import { PROJECTS } from "@/data/projects";
 
 export default function ProjectsRunner() {
-  const { installed, runAllToken, projectsOutput: output, setProjectsOutput } =
-    useInstall();
+  const { installed, projectsOutput: output, setProjectsOutput } = useInstall();
 
   const run = () => setProjectsOutput(installed ? "grid" : "error");
-
-  useEffect(() => {
-    if (runAllToken > 0) setProjectsOutput("grid");
-  }, [runAllToken, setProjectsOutput]);
 
   return (
     <section id="projects" className="mt-20">

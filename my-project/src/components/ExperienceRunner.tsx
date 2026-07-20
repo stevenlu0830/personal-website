@@ -1,19 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import { ExperienceCard } from "./cards";
 import { EXPERIENCE } from "@/data/experience";
 
 export default function ExperienceRunner() {
-  const { installed, runAllToken, experienceOutput: output, setExperienceOutput } =
+  const { installed, experienceOutput: output, setExperienceOutput } =
     useInstall();
 
   const run = () => setExperienceOutput(installed ? "cards" : "error");
-
-  useEffect(() => {
-    if (runAllToken > 0) setExperienceOutput("cards");
-  }, [runAllToken, setExperienceOutput]);
 
   return (
     <section id="experience" className="mt-20">

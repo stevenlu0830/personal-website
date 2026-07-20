@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useInstall } from "./InstallContext";
 import {
   CodeCell,
@@ -14,6 +13,10 @@ import {
   LANGUAGES,
   SONGS_CANTOPOP,
   SONGS_OTHER,
+  TRAVEL_ARG,
+  CANTO_ARG as CANTO,
+  OTHER_ARG as OTHER,
+  LANG_ARG as LANG,
   type Song,
 } from "@/data/funfacts";
 
@@ -38,33 +41,9 @@ function SongBullets({ songs }: { songs: Song[] }) {
   );
 }
 
-const CANTO = "Favourite Canto-pop Songs";
-const OTHER = "Favourite Songs other than Canto-pop";
-const TRAVEL_ARG = "Bucket-list Travel Places";
-const LANG = "Spoken Languages";
-
 export default function FunFactsRunner() {
-  const {
-    installed,
-    runAllToken,
-    funDefined,
-    setFunDefined,
-    funOutputs,
-    setFunOutputs,
-  } = useInstall();
-
-  // "Run all" runs every cell here: define fun_facts and fill all outputs.
-  useEffect(() => {
-    if (runAllToken > 0) {
-      setFunDefined(true);
-      setFunOutputs({
-        [TRAVEL_ARG]: "ok",
-        [CANTO]: "ok",
-        [OTHER]: "ok",
-        [LANG]: "ok",
-      });
-    }
-  }, [runAllToken, setFunDefined, setFunOutputs]);
+  const { installed, funDefined, setFunDefined, funOutputs, setFunOutputs } =
+    useInstall();
 
   const runFirst = () => {
     if (installed) setFunDefined(true);
