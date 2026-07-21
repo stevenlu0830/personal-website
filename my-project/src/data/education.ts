@@ -4,7 +4,7 @@ export const EDUCATION: Education[] = [
   {
     school: "The University of British Columbia",
     degree: "Bachelor of Science (BSc), Computer Science",
-    years: "Sep 2023 – Apr 2028 · GPA: 3.8",
+    years: "Sep 2023 – Apr 2028",
   },
   {
     school: "Chan Sui Ki (La Salle) College",
